@@ -1,0 +1,115 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         
+    2 00000000                 THUMB
+    3 00000000                 AREA             DATA, ALIGN=4
+    4 00000000                 EXPORT           M [DATA,SIZE=4]
+    5 00000000 00 00 00 
+              00       M       SPACE            4
+    6 00000004         
+    7 00000004                 AREA             |.text|, CODE, READONLY, ALIGN=
+2
+    8 00000000                 EXPORT           Start
+    9 00000000 4A07    Start   LDR              R2,=M       ; R2 = &M, R2 point
+                                                            s to M
+   10 00000002 F04F 0001       MOV              R0,#1       ; Initial seed
+   11 00000006 6010            STR              R0,[R2]     ; M=1
+   12 00000008 F000 F801 
+                       loop    BL               Random
+   13 0000000C E7FC            B                loop
+   14 0000000E         ;------------Random------------
+   15 0000000E         ; Return R0= random number
+   16 0000000E         ; Linear congruential generator 
+   17 0000000E         ; from Numerical Recipes by Press et al.
+   18 0000000E 4A04    Random  LDR              R2,=M       ; R2 = &M, R2 point
+                                                            s to M
+   19 00000010 6810            LDR              R0,[R2]     ; R0=M
+   20 00000012 4904            LDR              R1,=1664525
+   21 00000014 FB00 F001       MUL              R0,R0,R1    ; R0 = 1664525*M
+   22 00000018 4903            LDR              R1,=1013904223
+   23 0000001A 4408            ADD              R0,R1       ; 1664525*M+1013904
+                                                            223 
+   24 0000001C 6010            STR              R0,[R2]     ; store M
+   25 0000001E 4770            BX               LR
+   26 00000020         
+   27 00000020         
+   28 00000020                 ALIGN
+   29 00000020                 END
+              00000000 
+              0019660D 
+              3C6EF35F 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4 --apcs=interw
+ork --depend=.\main.d -o.\main.o -I.\RTE\_SimpleProject -IC:\Keil_v5\ARM\PACK\A
+RM\CMSIS\5.4.0\CMSIS\Core\Include -IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Dev
+ice\Include\TM4C123 --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION 
+SETA 526" --predefine="_RTE_ SETA 1" --predefine="TM4C123GH6PM SETA 1" --list=.
+\main.lst main.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+DATA 00000000
+
+Symbol: DATA
+   Definitions
+      At line 3 in file main.s
+   Uses
+      None
+Comment: DATA unused
+M 00000000
+
+Symbol: M
+   Definitions
+      At line 5 in file main.s
+   Uses
+      At line 4 in file main.s
+      At line 9 in file main.s
+      At line 18 in file main.s
+
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+.text 00000000
+
+Symbol: .text
+   Definitions
+      At line 7 in file main.s
+   Uses
+      None
+Comment: .text unused
+Random 0000000E
+
+Symbol: Random
+   Definitions
+      At line 18 in file main.s
+   Uses
+      At line 12 in file main.s
+Comment: Random used once
+Start 00000000
+
+Symbol: Start
+   Definitions
+      At line 9 in file main.s
+   Uses
+      At line 8 in file main.s
+Comment: Start used once
+loop 00000008
+
+Symbol: loop
+   Definitions
+      At line 12 in file main.s
+   Uses
+      At line 13 in file main.s
+Comment: loop used once
+4 symbols
+342 symbols in table
