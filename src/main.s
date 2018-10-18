@@ -7,7 +7,7 @@
 
 
 		THUMB
-        AREA    |.text|, CODE, READONLY, ALIGN=2
+        AREA    |.text|, CODE, ALIGN=2
         EXPORT  Start
 			
 
@@ -65,12 +65,29 @@ decrpyt_store
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 validate
-		POP		{r0 - r3}
+		POP		{r0, r1, r2, r3}
 		ADR		r10, message
+word_0
+		LDR		r4, [r10], #4
+		CMP		r3, r4
+		BNE		stop
+
 word_1
 		LDR		r4, [r10], #4
-		CMP		r0, 
+		CMP		r2, r4
+		BNE		stop
 
+word_2
+		LDR		r4, [r10], #4
+		CMP		r1, r4
+		BNE		stop	
+
+word_3
+		LDR		r4, [r10]
+		CMP		r0, r4
+		BNE		stop
+
+stop	B		.
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 encrpyt_JumpTable
