@@ -7,10 +7,8 @@
 
 
 		THUMB
-        AREA    |.text|, CODE, ALIGN=2
+        AREA    |.text|, CODE, READONLY, ALIGN=2
         EXPORT  Start
-			
-
 
 key		DCD		0x37A2B89E		;
 message	DCD		0x4D696368 		; Mich
@@ -24,19 +22,19 @@ Start
 		LDR		r12, [r12]
 		ADR		r10, message	; load the message address pointer
 		ADR		r9, encrpyt_JumpTable
-		LDR		r9, [r9]
 		ADR		r8, decrypt_JumpTable
-		LDR		r8, [r8]
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+encrypt
+		BL		load_case
 
 encrpyt_loop
 		LDR		r0, [r10], #4	; load a word
 		CMP		r0, #0
 		BEQ		decrpyt			
 		
-		;Not equal (still within the loop)
-		BL		load_case
+		; Not equal (still within the loop)
 		LDR		pc, [r9, r7, LSL #2]
 		
 encrpyt_store
@@ -46,6 +44,7 @@ encrpyt_store
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 decrpyt
+		BL		load_case
 		ADD		r10, sp, #12
 		MOV		r0, #0
 		PUSH	{r0}			; push null terminator
@@ -56,7 +55,6 @@ decrpyt_loop
 		BEQ		validate
 
 		; NE -> Still in the loop
-		BL		load_case
 		LDR		pc, [r8, r7, LSL #2]
 
 decrpyt_store
@@ -104,6 +102,7 @@ decrypt_JumpTable
 		
 load_case
 		MOV		r7, #0
+		MOVS	r0, r12
 		BPL		positive_case
 		BMI		negative_case
 
