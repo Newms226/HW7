@@ -1,0 +1,207 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ; r12 := key
+    2 00000000         ; r11 := recieved word
+    3 00000000         ; r10
+    4 00000000         ; r9
+    5 00000000         ; r8
+    6 00000000         ; r7  := case register for jump table
+    7 00000000         
+    8 00000000                 THUMB
+    9 00000000                 AREA             |.text|, CODE, READONLY, ALIGN=
+2
+   10 00000000                 EXPORT           Start
+   11 00000000         
+   12 00000000         
+   13 00000000         
+   14 00000000 37A2B89E 
+                       key     DCD              0x37A2B89E
+   15 00000004 00000000 
+                       message DCD              0x0
+   16 00000008         
+   17 00000008         Start
+   18 00000008 F2AF 0C0C       ADR              r12, key
+   19 0000000C F8DC C000       LDR              r12, [r12]
+   20 00000010 F2AF 0B10       ADR              r11, message
+   21 00000014 F85F B014       LDR              r11, message
+   22 00000018         
+   23 00000018         ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                       ~~~~~~~~~~~~~~~~~~~~~~
+   24 00000018         encrpyt
+   25 00000018         
+   26 00000018         decrypt
+   27 00000018         
+   28 00000018         ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                       ~~~~~~~~~~~~~~~~~~~~~~
+   29 00000018         JumpTable
+   30 00000018 00000000        DCD              case_0
+   31 0000001C 00000000        DCD              case_1
+   32 00000020 00000000        DCD              case_2
+   33 00000024 00000000        DCD              case_3
+   34 00000028         
+   35 00000028         load_case
+   36 00000028 F04F 0700       MOV              r7, #0
+   37 0000002C EA5F 000C       MOVS             r0, r12
+   38 00000030 D500            BPL              positive_case
+   39 00000032 D401            BMI              negative_case
+   40 00000034         
+   41 00000034         positive_case
+   42 00000034 F5B0 7F7A       CMP              r0, #1000
+   43 00000038         
+   44 00000038         negative_case
+   45 00000038 F510 7F7A       CMP              r0, #-1000
+   46 0000003C         
+   47 0000003C         
+   48 0000003C         case_0                               ; 0 - 1000
+   49 0000003C         
+   50 0000003C         case_1                               ; 1000 - inf
+   51 0000003C         
+   52 0000003C         case_2                               ; -1000 - 0
+   53 0000003C         
+   54 0000003C         case_3                               ; 0 - -1000
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   55 0000003C         
+   56 0000003C                 ALIGN
+   57 0000003C                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4 --apcs=interw
+ork --depend=.\main.d -o.\main.o -I.\RTE\_SimpleProject -IC:\Keil_v5\ARM\PACK\A
+RM\CMSIS\5.4.0\CMSIS\Core\Include -IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Dev
+ice\Include\TM4C123 --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION 
+SETA 526" --predefine="_RTE_ SETA 1" --predefine="TM4C123GH6PM SETA 1" --list=.
+\main.lst main.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+.text 00000000
+
+Symbol: .text
+   Definitions
+      At line 9 in file main.s
+   Uses
+      None
+Comment: .text unused
+JumpTable 00000018
+
+Symbol: JumpTable
+   Definitions
+      At line 29 in file main.s
+   Uses
+      None
+Comment: JumpTable unused
+Start 00000008
+
+Symbol: Start
+   Definitions
+      At line 17 in file main.s
+   Uses
+      At line 10 in file main.s
+Comment: Start used once
+case_0 0000003C
+
+Symbol: case_0
+   Definitions
+      At line 48 in file main.s
+   Uses
+      At line 30 in file main.s
+Comment: case_0 used once
+case_1 0000003C
+
+Symbol: case_1
+   Definitions
+      At line 50 in file main.s
+   Uses
+      At line 31 in file main.s
+Comment: case_1 used once
+case_2 0000003C
+
+Symbol: case_2
+   Definitions
+      At line 52 in file main.s
+   Uses
+      At line 32 in file main.s
+Comment: case_2 used once
+case_3 0000003C
+
+Symbol: case_3
+   Definitions
+      At line 54 in file main.s
+   Uses
+      At line 33 in file main.s
+Comment: case_3 used once
+decrypt 00000018
+
+Symbol: decrypt
+
+
+
+ARM Macro Assembler    Page 2 Alphabetic symbol ordering
+Relocatable symbols
+
+   Definitions
+      At line 26 in file main.s
+   Uses
+      None
+Comment: decrypt unused
+encrpyt 00000018
+
+Symbol: encrpyt
+   Definitions
+      At line 24 in file main.s
+   Uses
+      None
+Comment: encrpyt unused
+key 00000000
+
+Symbol: key
+   Definitions
+      At line 14 in file main.s
+   Uses
+      At line 18 in file main.s
+Comment: key used once
+load_case 00000028
+
+Symbol: load_case
+   Definitions
+      At line 35 in file main.s
+   Uses
+      None
+Comment: load_case unused
+message 00000004
+
+Symbol: message
+   Definitions
+      At line 15 in file main.s
+   Uses
+      At line 20 in file main.s
+      At line 21 in file main.s
+
+negative_case 00000038
+
+Symbol: negative_case
+   Definitions
+      At line 44 in file main.s
+   Uses
+      At line 39 in file main.s
+Comment: negative_case used once
+positive_case 00000034
+
+Symbol: positive_case
+   Definitions
+      At line 41 in file main.s
+   Uses
+      At line 38 in file main.s
+Comment: positive_case used once
+14 symbols
+348 symbols in table
