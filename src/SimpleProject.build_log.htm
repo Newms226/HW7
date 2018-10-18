@@ -29,10 +29,11 @@ Project File Date:  10/16/2018
 Rebuild target 'SimpleProject'
 assembling Startup.s...
 assembling main.s...
-main.s(45): warning: A1581W: Added 2 bytes of padding at address 0x32
-linking...
-Program Size: Code=808 RO-data=0 RW-data=0 ZI-data=1024  
-".\SimpleProject.axf" - 0 Error(s), 1 Warning(s).
+main.s(81): error: A1516E: Bad symbol 'decrpyt_store', not defined or external
+main.s(89): error: A1516E: Bad symbol 'decrpyt_store', not defined or external
+main.s(97): error: A1516E: Bad symbol 'decrpyt_store', not defined or external
+main.s(105): error: A1516E: Bad symbol 'decrpyt_store', not defined or external
+".\SimpleProject.axf" - 4 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -55,6 +56,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.1.2
+Target not created.
 Build Time Elapsed:  00:00:01
 </pre>
 </body>

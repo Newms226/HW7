@@ -1,8 +1,8 @@
 ; r12 := key
 ; r11 
 ; r10 := working message word pointer
-; r9
-; r8
+; r9  := encrpytion jump table ADDRESS
+; r8  := decryption jump table ADDRESS
 ; r7  := case register for jump table
 
 
@@ -23,25 +23,54 @@ Start
 		ADR		r12, key
 		LDR		r12, [r12]
 		ADR		r10, message	; load the message address pointer
-		
+		ADR		r9, encrpyt_JumpTable
+		LDR		r9, [r9]
+		ADR		r8, decrypt_JumpTable
+		LDR		r8, [r8]
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 encrpyt_loop
-		LDR		r11, [r10], #4		; load a word
-		CMP		r11, #0
-		BEQ		.				; TODO -> branch to decrpyt
+		LDR		r0, [r10], #4	; load a word
+		CMP		r0, #0
+		BEQ		decrpyt			
 		
 		;Not equal (still within the loop)
 		BL		load_case
+		LDR		pc, [r9, r7, LSL #2]
 		
-		
-chose_encryption_case
-		;BL		load_case
-		;ADR		encrpyt_JumpTable
-		;LDR
+encrpyt_store
+		PUSH	{r0}
+		B		encrpyt_loop
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-encrpyt
 
-decrypt
+decrpyt
+		ADD		r10, sp, #12
+		MOV		r0, #0
+		PUSH	{r0}			; push null terminator
+		
+decrpyt_loop
+		LDR		r0, [r10], #-4
+		CMP		r0, #0
+		BEQ		validate
+
+		; NE -> Still in the loop
+		BL		load_case
+		LDR		pc, [r8, r7, LSL #2]
+
+decrpyt_store
+		PUSH 	{r0}
+		B		decrpyt_loop
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+validate
+		POP		{r0 - r3}
+		ADR		r10, message
+word_1
+		LDR		r4, [r10], #4
+		CMP		r0, 
+
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 encrpyt_JumpTable
@@ -76,35 +105,35 @@ negative_case
 
 case_0 ; 0 - 1000
 		ROR		r0, r0, #5
-		BX		lr
+		B		encrpyt_store
 		
 case_0_reverse
 		ROR		r0, r0, #27
-		BX		lr
+		B		decrpyt_store
 
 case_1 ; 1000 - inf
 		ROR		r0, r0, #18 
-		BX		lr
+		B		encrpyt_store
 		
 case_1_reverse
 		ROR		r0, r0, #14
-		BX		lr
+		B		decrpyt_store
 
 case_2 ; -1000 - 0
 		ROR		r0, r0, #3
-		BX		lr
+		B		encrpyt_store
 		
 case_2_reverse
 		ROR		r0, r0, #29
-		BX		lr
+		B		decrpyt_store
 
 case_3 ; 0 - -1000
 		ROR		r0, r0, #21
-		BX		lr
+		B		encrpyt_store
 		
 case_3_reverse
 		ROR		r0, r0, #11
-		BX		lr
+		B		decrpyt_store
 		
 		ALIGN
 		END
