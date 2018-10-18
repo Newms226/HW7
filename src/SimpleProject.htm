@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\SimpleProject.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\SimpleProject.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Tue Oct 16 21:12:14 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Thu Oct 18 13:12:24 2018
 <BR><P>
 <H3>Maximum Stack Usage =          0 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -12,12 +12,16 @@ Call chain for Maximum Stack Depth:</H3>
 <H3>
 Functions with no stack information
 </H3><UL>
- <LI><a href="#[7e]">Reset_Handler</a>
- <LI><a href="#[81]">Start</a>
+ <LI><a href="#[82]">Reset_Handler</a>
+ <LI><a href="#[85]">Start</a>
  <LI><a href="#[7a]">case_0</a>
+ <LI><a href="#[7e]">case_0_reverse</a>
  <LI><a href="#[7b]">case_1</a>
+ <LI><a href="#[7f]">case_1_reverse</a>
  <LI><a href="#[7c]">case_2</a>
+ <LI><a href="#[80]">case_2_reverse</a>
  <LI><a href="#[7d]">case_3</a>
+ <LI><a href="#[81]">case_3_reverse</a>
 </UL>
 </UL>
 <P>
@@ -115,7 +119,7 @@ Function Pointers
  <LI><a href="#[17]">Quadrature0_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[2e]">Quadrature1_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[61]">Quadrature2_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
- <LI><a href="#[7e]">Reset_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
+ <LI><a href="#[82]">Reset_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[11]">SSI0_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[2a]">SSI1_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[41]">SSI2_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
@@ -159,9 +163,13 @@ Function Pointers
  <LI><a href="#[58]">WideTimer5A_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[59]">WideTimer5B_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[7a]">case_0</a> from main.o(.text) referenced from main.o(.text)
+ <LI><a href="#[7e]">case_0_reverse</a> from main.o(.text) referenced from main.o(.text)
  <LI><a href="#[7b]">case_1</a> from main.o(.text) referenced from main.o(.text)
+ <LI><a href="#[7f]">case_1_reverse</a> from main.o(.text) referenced from main.o(.text)
  <LI><a href="#[7c]">case_2</a> from main.o(.text) referenced from main.o(.text)
+ <LI><a href="#[80]">case_2_reverse</a> from main.o(.text) referenced from main.o(.text)
  <LI><a href="#[7d]">case_3</a> from main.o(.text) referenced from main.o(.text)
+ <LI><a href="#[81]">case_3_reverse</a> from main.o(.text) referenced from main.o(.text)
  <LI><a href="#[37]">uDMA_Error</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[36]">uDMA_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
 </UL>
@@ -169,8 +177,8 @@ Function Pointers
 <H3>
 Global Symbols
 </H3>
-<P><STRONG><a name="[7e]"></a>Reset_Handler</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup.o(RESET))
-<BR><BR>[Calls]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start
+<P><STRONG><a name="[82]"></a>Reset_Handler</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup.o(RESET))
+<BR><BR>[Calls]<UL><LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start
 </UL>
 
 <P><STRONG><a name="[1]"></a>NMI_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup.o(RESET))
@@ -246,9 +254,9 @@ Global Symbols
 <P><STRONG><a name="[19]"></a>ADC0Seq1_Handler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup.o(RESET))
 <BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
 </UL>
-<P><STRONG><a name="[7f]"></a>ADC0Seq2_Handler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup.o(RESET), UNUSED, KEPT)
+<P><STRONG><a name="[83]"></a>ADC0Seq2_Handler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup.o(RESET), UNUSED, KEPT)
 
-<P><STRONG><a name="[80]"></a>ADC0Seq3_Handler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup.o(RESET), UNUSED, KEPT)
+<P><STRONG><a name="[84]"></a>ADC0Seq3_Handler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup.o(RESET), UNUSED, KEPT)
 
 <P><STRONG><a name="[38]"></a>ADC1Seq0_Handler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup.o(RESET))
 <BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
@@ -580,8 +588,8 @@ Global Symbols
 <P><STRONG><a name="[36]"></a>uDMA_Handler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup.o(RESET))
 <BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
 </UL>
-<P><STRONG><a name="[81]"></a>Start</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, main.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Reset_Handler
+<P><STRONG><a name="[85]"></a>Start</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, main.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Reset_Handler
 </UL>
 <P>
 <H3>
@@ -590,13 +598,25 @@ Local Symbols
 <P><STRONG><a name="[7a]"></a>case_0</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, main.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> main.o(.text)
 </UL>
+<P><STRONG><a name="[7e]"></a>case_0_reverse</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, main.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> main.o(.text)
+</UL>
 <P><STRONG><a name="[7b]"></a>case_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, main.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> main.o(.text)
+</UL>
+<P><STRONG><a name="[7f]"></a>case_1_reverse</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, main.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> main.o(.text)
 </UL>
 <P><STRONG><a name="[7c]"></a>case_2</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, main.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> main.o(.text)
 </UL>
+<P><STRONG><a name="[80]"></a>case_2_reverse</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, main.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> main.o(.text)
+</UL>
 <P><STRONG><a name="[7d]"></a>case_3</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, main.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> main.o(.text)
+</UL>
+<P><STRONG><a name="[81]"></a>case_3_reverse</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, main.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> main.o(.text)
 </UL><P>
 <H3>
